@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("api/zooshop")
@@ -21,17 +19,17 @@ public class ZooController {
         return animalService.getZoo();
     }
 
-    /*@GetMapping
-    public List<ApiAnimal> getAnimals(){
+     @GetMapping()
+    public List<ApiAnimal> getAnimals() {
         List<Animal> animals = animalService.getZoo();
-        return animals.stream() Stream Animal;
-        .map(animal -> new ApiAnimal(animal.id(), animal.name(), animal.age())) Stream<ApiAnimal>
-        .toList
-    }*/
+        return animals.stream()
+                .map(animal -> new ApiAnimal(animal.id(), animal.name(), animal.age()))
+                .toList();
+    }
 
     @PostMapping()
-    public Animal postAnimal(@RequestBody  Animal animal){
-        return animalService.postAnimal(animal);
-
+    public ApiAnimal postAnimal(@RequestBody NewAnimal newAnimal) {
+        Animal newAnimal2 = animalService.save(newAnimal);
+        return new ApiAnimal(newAnimal2.id(), newAnimal2.name(), newAnimal2.age());
     }
 }

@@ -2,9 +2,6 @@ package org.example.springservicezoo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,9 +17,9 @@ public class AnimalService {
         return zooRepository.findAll();
     }
 
-    public Animal postAnimal(Animal newAnimal){
-        Animal animal = new Animal(UUID.randomUUID().toString(), newAnimal.name(),newAnimal.age(), newAnimal.purchasePrice());
-        return zooRepository.save(animal);
+    public Animal save(NewAnimal newAnimal){
+        Animal newAnimal2 = new Animal(UUID.randomUUID().toString(), newAnimal.name(),newAnimal.age(), 0);
+        return zooRepository.save(newAnimal2);
 
     }
 }
